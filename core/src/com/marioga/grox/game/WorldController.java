@@ -2,13 +2,10 @@ package com.marioga.grox.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureAdapter;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.PauseableThread;
 import com.marioga.grox.game.ai.GroxPlay;
 import com.marioga.grox.game.ai.PlayerAI;
 import com.marioga.grox.game.objects.Block;
@@ -45,6 +42,7 @@ import com.marioga.grox.game.objects.Block.BlockState;
 	
 	private void init () {
 		gameWorld = new GameWorld();
+		Gdx.input.setInputProcessor(new GestureDetector(this));
 		
 		if (!gameWorld.getFirstPlayer().isHuman()) {
 			handleAIPlay();

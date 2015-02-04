@@ -24,7 +24,8 @@ public class WorldRenderer implements Disposable {
 		batch = new SpriteBatch();
 	}
 	
-	public void resize (int width, int height) { 
+	public void resize (int width, int height) {
+		// Only resize height
 		camera.viewportHeight = (Constants.VIEWPORT_WIDTH / width) *
 				height;
 		camera.update();
