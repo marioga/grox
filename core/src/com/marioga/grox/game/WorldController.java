@@ -37,104 +37,19 @@ import com.marioga.grox.game.objects.Block.BlockState;
 	private boolean keyWasPressed = false;
 	private boolean draggingInProgress = false;
 
-	private Stage stage;
-	
-//	private TextButton buttonUndo;
-//	private TextButton buttonDone;
-
-	public WorldController (Game game, OrthographicCamera camera, Stage stage) { 
+	public WorldController (Game game, OrthographicCamera camera) { 
 		this.game = game;
 		this.camera = camera;
-		this.stage = stage;
 		init();
 	}
 	
 	private void init () {
 		gameWorld = new GameWorld();
 		
-		InputMultiplexer inputMultiplexer = new InputMultiplexer();
-		inputMultiplexer.addProcessor(new GestureDetector(this));
-		inputMultiplexer.addProcessor(stage);
-		Gdx.input.setInputProcessor(inputMultiplexer);
-		
 		if (!gameWorld.getFirstPlayer().isHuman()) {
 			handleAIPlay();
 		}
-		
-//		initStage();
 	}
-	
-//	private void initStage() {
-//		Texture upRegion = new Texture(Gdx.files.internal("images/block_tile.png"));
-//		Texture downRegion = new Texture(Gdx.files.internal("images/tile.png"));
-//
-//		TextButtonStyle style = new TextButtonStyle();
-//		style.up = new TextureRegionDrawable(new TextureRegion(upRegion));
-//		style.down = new TextureRegionDrawable(new TextureRegion(downRegion));
-//		style.font = new BitmapFont(Gdx.files.internal("fonts/test.fnt"));
-//		style.font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-//
-//		buttonUndo = new TextButton("Undo", style);
-//		buttonUndo.setWidth(50);
-//		buttonUndo.setHeight(50);
-//		buttonUndo.setTransform(true);
-//		buttonUndo.setOrigin(buttonUndo.getWidth()/2,buttonUndo.getHeight()/2);
-//		buttonUndo.setRotation(90);
-//		buttonUndo.setColor(new Color(0.8f,0.2f,0.2f,0.9f));
-//		buttonUndo.setVisible(false);
-//		buttonUndo.setPosition(-0.492f*stage.getViewport().getCamera().viewportWidth, -buttonUndo.getHeight()/2);
-//		stage.addActor(buttonUndo);
-//		buttonUndo.addListener(new ChangeListener() {
-//
-//			@Override
-//			public void changed(ChangeEvent event, Actor actor) {
-//				Array<Block> myArray = (gameWorld.getTurn() == Turn.PLAYER_1) ? gameWorld.playerOneBlocks : gameWorld.playerTwoBlocks;
-//				for (Block block : myArray) {
-//					if (block.getBlockState() == BlockState.POSITIONED) {
-//						buttonUndo.setVisible(false);
-//						buttonDone.setVisible(false);
-//						blockPositioned=false;
-//						block.setBlockState(BlockState.IDLE);
-//						block.setCurrentScaleFactor(block.getInitialScaleFactor());
-//						block.getCenterBlockPosition().set(block.getInitialPosition());
-//						gameWorld.clearPieceFromBoard(block.getRow(), block.getColumn(), block);
-//					}
-//				}
-//			}
-//		});
-//
-//		buttonDone = new TextButton("Play", style);
-//		buttonDone.setWidth(50);
-//		buttonDone.setHeight(50);
-//		buttonDone.setTransform(true);
-//		buttonDone.setOrigin(buttonDone.getWidth()/2,buttonDone.getHeight()/2);
-//		buttonDone.setRotation(-90);
-//		buttonDone.setColor(new Color(0.8f,0.2f,0.2f,0.9f));
-//		buttonDone.setVisible(false);
-//		buttonDone.setPosition(0.492f*stage.getViewport().getCamera().viewportWidth-buttonDone.getWidth(), -buttonDone.getHeight()/2);
-//		stage.addActor(buttonDone);
-//		buttonDone.addListener(new ChangeListener() {
-//
-//			@Override
-//			public void changed(ChangeEvent event, Actor actor) {
-//				Array<Block> myArray = (gameWorld.getTurn() == Turn.PLAYER_1) ? gameWorld.playerOneBlocks : gameWorld.playerTwoBlocks;
-//				for (Block block : myArray) {
-//					if (block.getBlockState() == BlockState.POSITIONED) {
-//						buttonUndo.setVisible(false);
-//						buttonDone.setVisible(false);
-//						blockPositioned=false;
-//						block.setBlockState(BlockState.PLAYED);
-//						if (gameWorld.getTurn() == Turn.PLAYER_1) {
-//							gameWorld.setTurn(Turn.PLAYER_2);
-//						} else { 
-//							gameWorld.setTurn(Turn.PLAYER_1);
-//						}
-//						
-//					}
-//				}
-//			}
-//		});
-//	}
 	
 	public void update (float deltaTime) {
 		if (Gdx.input.isTouched()) {

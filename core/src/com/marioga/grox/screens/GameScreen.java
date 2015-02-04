@@ -54,16 +54,13 @@ public class GameScreen extends ScreenAdapter {
 				Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
 		camera.position.set(0, 0, 0);
 		camera.update();
-		Stage stage = new Stage();
-		stage.getViewport().setCamera(
-				new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH,
-						Constants.VIEWPORT_GUI_HEIGHT));
-		worldController = new WorldController(game, camera, stage);
-		worldRenderer = new WorldRenderer(worldController, camera, stage);
+		
+		worldController = new WorldController(game, camera);
+		worldRenderer = new WorldRenderer(worldController, camera);
 	}
 
 	@Override
-	public void hide () {
+	public void dispose () {
 		worldRenderer.dispose();
 	}
 

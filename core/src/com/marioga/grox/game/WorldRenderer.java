@@ -13,12 +13,10 @@ public class WorldRenderer implements Disposable {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private WorldController worldController;
-	private Stage stage;
 
-	public WorldRenderer (WorldController worldController, OrthographicCamera camera, Stage stage) { 
+	public WorldRenderer (WorldController worldController, OrthographicCamera camera) { 
 		this.worldController = worldController;
 		this.camera = camera;
-		this.stage = stage;
 		init();
 	}
 	
@@ -31,10 +29,6 @@ public class WorldRenderer implements Disposable {
 				height;
 		camera.update();
 		
-		stage.getViewport().getCamera().viewportHeight = 
-				(stage.getViewport().getCamera().viewportWidth / width) * height;
-		stage.getViewport().getCamera().update();
-		
 		worldController.gameWorld.updateWorldDimensions(camera.viewportHeight);
 	}
 	
@@ -43,13 +37,10 @@ public class WorldRenderer implements Disposable {
 		batch.begin();
 		worldController.gameWorld.render(batch);
 		batch.end();
-		
-		stage.draw();
 	}
 	
 	@Override
 	public void dispose() {
 		batch.dispose();
-		stage.dispose();
 	}
 }
