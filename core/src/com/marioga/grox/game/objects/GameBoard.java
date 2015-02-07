@@ -62,15 +62,17 @@ public class GameBoard {
 	public void render(SpriteBatch batch) {
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				if (shades[i][j]) {
+				if (gameBoardModel[i + 1][j + 1] == -1) {
+					batch.setColor(Color.DARK_GRAY);
+				} else if (shades[i][j]) {
 					batch.setColor(Color.GRAY);
 				}
-				Texture region;
-				if (gameBoardModel[i + 1][j + 1] == -1) {
-					region = blockedRegion;
-				} else {
-					region = emptyRegion;
-				}
+				Texture region = emptyRegion;
+//				if (gameBoardModel[i + 1][j + 1] == -1) {
+//					region = blockedRegion;
+//				} else {
+//					region = emptyRegion;
+//				}
 				batch.draw(region, centerPosition.x
 						+ (j - (float) this.width / 2) * blockDimension,
 						centerPosition.y
@@ -78,7 +80,7 @@ public class GameBoard {
 						* blockDimension, blockDimension,
 						blockDimension, 0, 0, region.getWidth(),
 						region.getHeight(), false, false);
-				if (shades[i][j]) {
+				if (shades[i][j] || gameBoardModel[i + 1][j + 1] == -1) {
 					batch.setColor(Color.WHITE);
 				}
 			}

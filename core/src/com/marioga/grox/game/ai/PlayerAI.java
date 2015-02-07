@@ -122,7 +122,10 @@ public class PlayerAI {
 		int sum = 0;
 		for (int row = 1; row < boardModel.length - 1; row++) {
 			for (int column = 1; column < boardModel[0].length - 1; column++) {
-				sum += boardModel[row][column];
+				if (boardModel[row][column] != -1) {
+					// Not a blocked square
+					sum += boardModel[row][column];
+				}
 			}
 		}
 		return (int) Math.floor(sum / 8) + 1;
@@ -264,7 +267,7 @@ public class PlayerAI {
 			Array<Block> playerBlocks, Array<Block> opponentBlocks) {
 		// Makes the play that minimizes number of losses
 
-		if (getPlayNumber(boardModel) <= 2) {
+		if (getPlayNumber(boardModel) <= 1) {
 			return computeNextPlayBeginner(boardModel, playerBlocks,
 					opponentBlocks);
 		}
@@ -284,7 +287,7 @@ public class PlayerAI {
 							int losses = computeNumberOfLosses(play,
 									boardModel, playerBlocks, opponentBlocks);
 							if (losses == 0) {
-								Gdx.app.debug("Best", "Boom");
+								Gdx.app.debug("Best", "You lose!");
 								return play;
 							}
 							if (losses < minLosses) {

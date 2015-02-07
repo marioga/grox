@@ -1,5 +1,7 @@
 package com.marioga.grox.game;
 
+import java.util.Random;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -85,7 +87,7 @@ public class GameWorld {
 			blockedSpaces[i][0] = true;
 			blockedSpaces[i][gameBoardWidth + 1] = true;
 		}
-		blockedSpaces[4][4] = true;
+		blockRandomSpaces(blockedSpaces, Constants.BLOCKED_SPACES);
 		
 		// Create the board
 		gameBoard = new GameBoard(
@@ -111,6 +113,21 @@ public class GameWorld {
 
 		getFirstPlayer().setBlocks(firstPlayerBlocks);
 		getSecondPlayer().setBlocks(secondPlayerBlocks);
+	}
+	
+	private void blockRandomSpaces(boolean[][] blockedSpaces, int num) {
+		Random rnd = new Random();
+		int row;
+		int col;
+		int cont = 0;
+		while (cont < num) {
+			row = rnd.nextInt(blockedSpaces.length - 2);
+			col = rnd.nextInt(blockedSpaces[0].length - 2);
+			if (!blockedSpaces[row + 1][col + 1]) {
+				blockedSpaces[row + 1][col + 1] = true;
+				cont++;
+			}
+		}
 	}
 
 	public void updateWorldDimensions(float viewportHeight) {
