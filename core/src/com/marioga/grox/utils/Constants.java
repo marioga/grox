@@ -14,7 +14,7 @@ public class Constants {
 	public static final Level FIRST_PLAYER_LEVEL = Level.HUMAN;
 	
 	//Second Player Level
-	public static final Level SECOND_PLAYER_LEVEL = Level.EXPERT;
+	public static final Level SECOND_PLAYER_LEVEL = Level.HUMAN;
 	
 	
 }

@@ -75,9 +75,22 @@ public class GameWorld {
 
 		dimensionTile = 0.75f * Constants.VIEWPORT_WIDTH / gameBoardWidth;
 
+		boolean[][] blockedSpaces = 
+				new boolean[gameBoardHeight + 2][gameBoardWidth + 2];
+		for (int i = 0; i <= gameBoardWidth + 1; i++) {
+			blockedSpaces[0][i] = true;
+			blockedSpaces[gameBoardHeight + 1][i] = true;
+		}
+		for (int i = 0; i <= gameBoardHeight + 1; i++) {
+			blockedSpaces[i][0] = true;
+			blockedSpaces[i][gameBoardWidth + 1] = true;
+		}
+		blockedSpaces[4][4] = true;
+		
 		// Create the board
 		gameBoard = new GameBoard(
-				gameBoardWidth, gameBoardHeight, dimensionTile);
+				gameBoardWidth, gameBoardHeight, 
+				dimensionTile, blockedSpaces);
 
 		// Create the players
 		players = new Array<Player>();
@@ -146,8 +159,8 @@ public class GameWorld {
 		}
 	}
 
-	public static boolean isValidMove(int[][] boardMatrix, int[][] blockMatrix,
-			int row, int column) {
+	public static boolean isValidMove(int[][] boardMatrix,
+			int[][] blockMatrix, int row, int column) {
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
 				if ((blockMatrix[i + 1][j + 1] == 1)
