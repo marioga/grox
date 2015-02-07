@@ -33,10 +33,10 @@ public class GameScreen extends ScreenAdapter {
 			worldController.update(deltaTime);
 		}
 		
-		Gdx.gl.glClearColor(0xa3 / 255.0f,
-				0x93 / 255.0f,
-				0x93 / 255.0f,
-				0xff / 255.0f);
+		Gdx.gl.glClearColor(0x93 / 255.0f,
+				0x75 / 255.0f,
+				0x75 / 255.0f,
+				0x93 / 255.0f);
 		// Clears the screen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// Render game world to screen
@@ -50,8 +50,9 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void show () {
+		// Initially start with a square camera; it will be resized
 		OrthographicCamera camera = new OrthographicCamera(
-				Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
+				Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_WIDTH);
 		camera.position.set(0, 0, 0);
 		camera.update();
 		

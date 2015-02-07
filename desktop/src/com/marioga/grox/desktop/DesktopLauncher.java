@@ -7,7 +7,7 @@ import com.marioga.grox.Grox;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 600;
+		config.width = 512;
 		config.height = 800;
 		config.resizable = false;
 		config.title = "Grox";
